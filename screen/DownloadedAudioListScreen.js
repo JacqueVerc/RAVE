@@ -5,7 +5,7 @@ import { Audio } from 'expo-av';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
-
+// Vue listant les fichiers modifiés que le serveur nous a renvoyé (fonctionne de la même manière que AudioListScreen)
 const DownloadedAudioListScreen = ({navigation}) => {
     const [recordings, setRecordings] = useState([]);
 

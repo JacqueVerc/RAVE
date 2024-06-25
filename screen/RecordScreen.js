@@ -4,13 +4,13 @@ import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 
 const RecordScreen = (props) => {
-    const padName = props.padName;
     const [sound, setSound] = useState();
     const [recording, setRecording] = useState();
     const [permissionResponse, requestPermission] = Audio.usePermissions();
     const [recordingUri, setRecordingUri] = useState();
     const [isRecording, setIsRecording] = useState(false);
 
+    // S'assure qu'a l'arrivé sur la page, il n'y a pas d'audio en mémoire
     useEffect(() => {
         return sound ? () => {
             console.log('Unloading sound...');
@@ -18,6 +18,7 @@ const RecordScreen = (props) => {
         } : undefined;
     }, [sound]);
 
+    // Lance le record si la permission est donnée par l'utilisateur
     const startRecording = async () => {
         try {
             if (permissionResponse.status !== 'granted') {
@@ -33,6 +34,7 @@ const RecordScreen = (props) => {
         }
     };
 
+    // Arrête le record
     const stopRecording = async () => {
         if (recording) {
             await recording.stopAndUnloadAsync();
@@ -43,6 +45,7 @@ const RecordScreen = (props) => {
         }
     };
 
+    // Joue ce qui a été enregistré ou lève une erreurs s'il n'y a rien
     const playSound = async () => {
         if (recordingUri) {
             const { sound } = await Audio.Sound.createAsync({ uri: recordingUri });
@@ -53,6 +56,7 @@ const RecordScreen = (props) => {
         }
     };
 
+    // Delet l'enregistrement s'il y en a un
     const deleteRecording = () => {
         if (recordingUri) {
             setRecordingUri(null);
@@ -62,6 +66,7 @@ const RecordScreen = (props) => {
         }
     };
 
+    // Sauvegarde l'enregistrement dans le directory de l'app
     const saveRecording = async () => {
         if (recordingUri) {
             const fileName = `${FileSystem.documentDirectory}recording_${Date.now()}.m4a`;

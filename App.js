@@ -11,6 +11,8 @@ const Stack = createStackNavigator();
 
 export default function App() {
     return (
+        // Gère mes écrans sans tab
+        // Entouré su stateProvider pour pouvoir utiliser le state global
         <AppStateProvider>
             <NavigationContainer>
                 <Stack.Navigator>

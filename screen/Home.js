@@ -3,13 +3,14 @@ import {View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity} from
 import { useAppState } from '../AppState';
 
 const Home = ({navigation}) => {
+    // Save les state dans le state globale pour les utiliser plus tard (à défaut d'un store)
     const { ip, setIp, port, setPort } = useAppState();
 
     const handleConnect = () => {
         const url = `http://${ip}:${port}/`;
         console.log(ip);
 
-        // Vérifie que la connexion se fait bien, si elle n'est pas bonne, on renvoie a la home
+        // Vérifie que la connexion se fait bien, si elle n'est pas bonne, on renvoie à la home
         fetch(url)
             .catch(error => {
                 Alert.alert('Error', 'Connexion failed');

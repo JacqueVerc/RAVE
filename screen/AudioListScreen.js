@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const AudioListScreen = ({navigation}) => {
     const [recordings, setRecordings] = useState([]);
 
+    // Récupère les enregistrement sauvegardé précédement dans le dossier de l'app à l'arrivé sur la vue
     useEffect(() => {
         const fetchRecordings = async () => {
             const files = await FileSystem.readDirectoryAsync(FileSystem.documentDirectory);
@@ -18,6 +19,7 @@ const AudioListScreen = ({navigation}) => {
         fetchRecordings();
     }, []);
 
+    // Supprime un enregistrement sauvegardé
     const deleteRecording = async (fileName) => {
         console.log(fileName);
         const fileUri = `${FileSystem.documentDirectory}${fileName}`;
@@ -25,12 +27,14 @@ const AudioListScreen = ({navigation}) => {
         setRecordings(recordings.filter(recording => recording !== fileName));
     };
 
+    // Joue un enregistrement
     const playRecording = async (fileName) => {
         const fileUri = `${FileSystem.documentDirectory}${fileName}`;
         const {sound} = await Audio.Sound.createAsync({uri: fileUri});
         await sound.playAsync();
     };
 
+    // Permet la navigation vers la vue avec les model, en donnant comme paramètre l'enregistrement sur lequel on appuie
     const handlePress = (item) => {
         navigation.navigate('RAVE Screen', { fileName: item });
     };

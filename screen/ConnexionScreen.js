@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
+// Page permettant un retour sur la réussite de la connexion et redirige vers la vue d'enregistrement ou celle de RAVE
 const SecondScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>

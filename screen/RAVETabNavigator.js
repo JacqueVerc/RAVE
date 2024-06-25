@@ -7,6 +7,7 @@ import Ionicons from "react-native-vector-icons/Ionicons"; // Another screen in 
 
 const NestedTab = createBottomTabNavigator();
 
+// Sous-tab pour une meilleur mobilité dans les vues de l'app (Si la vue 2 est choisi en passant par le bottomTab et qu'aucun audio n'a été choisie avant, l'app crash)
 export default function RAVETabNavigator() {
     return (
         <NestedTab.Navigator>
